@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="SingleLine">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="SingleLine.Regular" />
+
+    <style name="SingleLine.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleWhite" parent="SingleLine.Bold">
+        <item name="android:textColor">@color/all_text_white</item>
+        <item name="android:textSize">@dimen/all_textsize_large</item>
+    </style>
+
+    <style name="Button" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textColor">@color/all_text_white</item>
+        <item name="android:background">@drawable/all_button_bg_red_solid_rounded</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ItemHeaderText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/all_textsize_header</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ItemHeaderWithBorderText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/all_textsize_medium</item>
+        <item name="android:textColor">@color/all_red_dark</item>
+        <item name="android:background">@drawable/all_text_bg_red_stroke_rounded</item>
+        <item name="android:padding">@dimen/all_margin_padding_tiny_4</item>
+    </style>
+</resources>

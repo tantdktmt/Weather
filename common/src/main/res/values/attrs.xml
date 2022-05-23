@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <declare-styleable name="ToolbarAttr">
+        <attr name="hide_back_button" format="boolean" />
+        <attr name="back_button_icon" format="reference" />
+        <attr name="android:text"/>
+        <attr name="android:background" />
+    </declare-styleable>
+</resources>
