@@ -2,15 +2,13 @@ package com.nab.weather.common.data
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.nab.weather.common.data.dto.ResponseDto
-import com.nab.weather.common.data.dto.StatusDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 abstract class RefreshableApiExecutor {
 
-    suspend inline fun <reified T : ResponseDto<*>> safeApiCall(
+    suspend inline fun <reified T> safeApiCall(
         crossinline call: suspend () -> Response<T>): T {
         return withContext(Dispatchers.IO) {
             try {
@@ -25,7 +23,6 @@ abstract class RefreshableApiExecutor {
                 }
             } catch (e: Exception) {
                 val response = T::class.java.newInstance()
-                response.status?.code = StatusDto.CommonCode.ERROR
                 return@withContext response
             }
         }

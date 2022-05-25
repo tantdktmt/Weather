@@ -15,8 +15,8 @@ class GetCityForecastUseCaseImpl @Inject constructor(
         count: Int,
         appId: String
     ): List<DailyForecastEntity>? {
-        val cityForecastDto = repository.getCityDailyForecast(query, count, appId).data
-        val listForecastEntity = cityForecastDto?.list?.map {
+        val cityForecastDto = repository.getCityDailyForecast(query, count, appId)
+        val listForecastEntity = cityForecastDto.list?.map {
             Mapper.map(it)
         }
         return listForecastEntity
