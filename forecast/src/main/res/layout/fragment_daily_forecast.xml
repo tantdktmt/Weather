@@ -16,14 +16,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <com.nab.weather.common.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weather_forecast_title"
+            app:hide_back_button="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search_keyword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/all_margin_padding_tiny_4"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:gravity="center_vertical"
+            android:hint="@string/weather_forecast_search_hint"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/all_textsize_large"
+            android:visibility="@{safeUnbox(view_model.loading) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_get_weather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forecast daily"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/weather_forecast_get_weather_button_text"
+            android:visibility="@{safeUnbox(view_model.loading) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search_keyword" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_forecast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(view_model.loading) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_get_weather" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

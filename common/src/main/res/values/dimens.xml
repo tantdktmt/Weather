@@ -5,7 +5,7 @@
     <!-- Common -->
     <dimen name="all_toolbar_height">@dimen/_46sdp</dimen>
     <dimen name="all_textsize_medium">@dimen/_12ssp</dimen>
-    <dimen name="all_textsize_large">@dimen/_14ssp</dimen>
+    <dimen name="all_textsize_large">@dimen/_15ssp</dimen>
     <dimen name="all_textsize_header">@dimen/_18ssp</dimen>
     <dimen name="all_margin_padding_tiny_1">@dimen/_2sdp</dimen>
     <dimen name="all_margin_padding_tiny_2">@dimen/_5sdp</dimen>

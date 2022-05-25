@@ -8,7 +8,7 @@
         android:id="@+id/layout_container"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/all_red_dark"
+        android:background="@color/all_green_dark"
         android:orientation="vertical"
         tools:layout_height="@dimen/all_toolbar_height">
 
@@ -37,9 +37,9 @@
             style="@style/TitleWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/all_margin_padding_large"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layout_back"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

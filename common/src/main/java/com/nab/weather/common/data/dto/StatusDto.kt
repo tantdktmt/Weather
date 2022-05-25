@@ -1,6 +1,12 @@
 package com.nab.weather.common.data.dto
 
 data class StatusDto(
-    val code: String?,
-    val message: String?,
-)
+    var code: String?,
+    var message: String?
+) {
+
+    object CommonCode {
+
+        const val ERROR = "Error"
+    }
+}

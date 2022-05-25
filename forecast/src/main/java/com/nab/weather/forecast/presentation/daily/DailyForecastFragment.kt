@@ -29,5 +29,10 @@ class DailyForecastFragment :
 
     override fun onResume() {
         super.onResume()
+        viewModel.run {
+            if (listForecastModel.value.isEmpty()) {
+                loadData()
+            }
+        }
     }
 }

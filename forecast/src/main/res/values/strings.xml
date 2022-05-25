@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="weather_forecast_title">Weather Forecast</string>
+    <string name="weather_forecast_search_hint">Input keyword to search weather</string>
+    <string name="weather_forecast_get_weather_button_text">Get Weather</string>
+</resources>
