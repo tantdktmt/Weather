@@ -1,5 +1,7 @@
 package com.nab.weather.forecast.presentation.model
 
+import android.content.Context
+import com.nab.weather.forecast.R
 import com.nab.weather.forecast.data.dto.DailyForecastDto
 import com.nab.weather.forecast.data.dto.FeelsLikeDto
 import com.nab.weather.forecast.data.dto.WeatherDto
@@ -7,21 +9,40 @@ import com.nab.weather.utility.DateUtil
 
 object ModelUtil {
 
-//    fun buildListDailyForecastModel(listEntity: List<DailyForecastEntity>): List<DailyForecastModel> {
-//        val listModel = mutableListOf<DailyForecastModel>()
-//        listEntity.forEachIndexed { i, entity ->
-//            listModel.add(
-//                DailyForecastModel(
-//                    DateUtil.convertLongToString(entity.date),
-//                    generateAverageTemp(entity.feelsLike),
-//                    entity.pressure,
-//                    entity.humidity,
-//                    generateDescription(entity.weather)
-//                )
-//            )
-//        }
-//        return listModel
-//    }
+    fun buildListDailyForecastModel(
+        context: Context,
+        listForecastDto: List<DailyForecastDto>
+    ): List<BaseListModel> {
+        val listModel = mutableListOf<BaseListModel>()
+        listForecastDto.forEachIndexed { i, forecastDto ->
+            listModel.add(
+                DailyForecastModel(
+                    context.resources.getString(
+                        R.string.weather_forecast_item_date_text,
+                        DateUtil.convertLongToString(forecastDto.dt)
+                    ),
+                    context.resources.getString(
+                        R.string.weather_forecast_item_temperature_text,
+                        generateAverageTemp(forecastDto.feelsLike)
+                    ),
+                    context.resources.getString(
+                        R.string.weather_forecast_item_pressure_text,
+                        forecastDto.pressure
+                    ),
+                    context.resources.getString(
+                        R.string.weather_forecast_item_humidity_text,
+                        forecastDto.humidity
+                    ),
+                    context.resources.getString(
+                        R.string.weather_forecast_item_description_text,
+                        generateDescription(forecastDto.weather)
+                    )
+                )
+            )
+            if (i < listForecastDto.size - 1) listModel.add(BaseListModel.DividerModel)
+        }
+        return listModel
+    }
 
     private fun generateAverageTemp(feelsLike: FeelsLikeDto?): String {
         // TODO: correct generate temperature in oC
@@ -36,21 +57,5 @@ object ModelUtil {
             strBuilder.append(it.description)
         }
         return strBuilder.toString()
-    }
-
-    fun buildListDailyForecastModel(listForecastDto: List<DailyForecastDto>): List<DailyForecastModel> {
-        val listModel = mutableListOf<DailyForecastModel>()
-        listForecastDto.forEachIndexed { i, forecastDto ->
-            listModel.add(
-                DailyForecastModel(
-                    DateUtil.convertLongToString(forecastDto.dt),
-                    generateAverageTemp(forecastDto.feelsLike),
-                    forecastDto.pressure,
-                    forecastDto.humidity,
-                    generateDescription(forecastDto.weather)
-                )
-            )
-        }
-        return listModel
     }
 }

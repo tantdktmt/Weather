@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item_data"
+            type="com.nab.weather.forecast.presentation.model.DailyForecastModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/all_margin_padding_tiny_1"
+        android:paddingVertical="@dimen/all_margin_padding_tiny_2">
+
+        <TextView
+            style="@style/ItemContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item_data.date}" />
+
+        <TextView
+            style="@style/ItemContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item_data.averageTemp}" />
+
+        <TextView
+            style="@style/ItemContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item_data.pressure}" />
+
+        <TextView
+            style="@style/ItemContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item_data.humidity}" />
+
+        <TextView
+            style="@style/ItemContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item_data.description}" />
+    </LinearLayout>
+</layout>

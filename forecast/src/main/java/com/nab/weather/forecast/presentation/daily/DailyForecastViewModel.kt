@@ -1,22 +1,27 @@
 package com.nab.weather.forecast.presentation.daily
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.nab.weather.common.base.BaseViewModel
 import com.nab.weather.common.data.Result
-import com.nab.weather.forecast.presentation.model.DailyForecastModel
+import com.nab.weather.forecast.presentation.model.BaseListModel
 import com.nab.weather.forecast.presentation.model.ModelUtil
 import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DailyForecastViewModel @Inject constructor(private val getCityForecastUseCase: GetCityForecastUseCase) :
-    BaseViewModel() {
+class DailyForecastViewModel @Inject constructor(
+    @ApplicationContext val applicationContext: Context,
+    private val getCityForecastUseCase: GetCityForecastUseCase
+) : BaseViewModel(applicationContext as Application) {
 
-    private val _listForecastModel: MutableStateFlow<List<DailyForecastModel>> by lazy {
+    private val _listForecastModel: MutableStateFlow<List<BaseListModel>> by lazy {
         MutableStateFlow(mutableListOf())
     }
     val listForecastModel = _listForecastModel.asStateFlow()
@@ -29,7 +34,7 @@ class DailyForecastViewModel @Inject constructor(private val getCityForecastUseC
                     is Result.Loading -> _loading.value = true
                     is Result.Success -> {
                         it.data?.list?.let {
-                            _listForecastModel.value = ModelUtil.buildListDailyForecastModel(it)
+                            _listForecastModel.value = ModelUtil.buildListDailyForecastModel(applicationContext, it)
                         }
                         _loading.value = false
                     }

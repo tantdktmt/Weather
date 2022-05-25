@@ -2,6 +2,7 @@ package com.nab.weather.forecast.presentation.daily
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nab.weather.common.base.BaseFragment
 import com.nab.weather.forecast.BR
 import com.nab.weather.forecast.R
@@ -16,6 +17,9 @@ class DailyForecastFragment :
     BaseFragment<DailyForecastViewModel, FragmentDailyForecastBinding>() {
 
     private val viewModel by viewModels<DailyForecastViewModel>()
+    private val forecastAdapter by lazy {
+        ForecastAdapter()
+    }
 
     override fun getLayoutId() = R.layout.fragment_daily_forecast
 
@@ -24,6 +28,13 @@ class DailyForecastFragment :
     override fun getAssociatedViewModel() = viewModel
 
     override fun initView() {
+        binding.rvForecast.apply {
+            val layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            setLayoutManager(layoutManager)
+            setHasFixedSize(true)
+            adapter = forecastAdapter
+        }
     }
 
     override fun observeDataChanged() {
@@ -31,6 +42,7 @@ class DailyForecastFragment :
             listForecastModel.onEach {
                 LogUtil.d("list forecast: ${it.size}")
                 if (it.isNotEmpty()) {
+                    forecastAdapter.submitList(it)
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         }

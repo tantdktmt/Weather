@@ -7,11 +7,13 @@
     <color name="all_blue">#2e34ab</color>
     <color name="all_orange_1">#dbb539</color>
     <color name="all_orange_2">#f0ce71</color>
+    <color name="all_text_gray">#878B96</color>
     <color name="all_text_white">#f7eeed</color>
     <color name="all_text_orange">#dbb539</color>
     <color name="all_gray_1">#eff0f4</color>
     <color name="all_gray_2">#bcc2d2</color>
     <color name="all_gray_3">#dee1e9</color>
+    <color name="all_gray_4">#878B96</color>
     <color name="all_black">#000000</color>
     <color name="all_black_alpha_80">#cc000000</color>
 </resources>
