@@ -11,6 +11,10 @@ object DateUtil {
     fun convertDateToString(date: Date, format: String = DATE_FORMAT) =
         SimpleDateFormat(format, Locale.getDefault()).format(date)
 
-    fun convertLongToString(time: Long, format: String = DATE_FORMAT) =
-        convertDateToString(Date(time))
+    fun convertLongToString(time: Long?, format: String = DATE_FORMAT): String? {
+        time?.let {
+            return convertDateToString(Date(it), format)
+        }
+        return null
+    }
 }

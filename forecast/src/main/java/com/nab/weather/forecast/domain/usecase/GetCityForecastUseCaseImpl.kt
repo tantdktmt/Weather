@@ -1,7 +1,5 @@
 package com.nab.weather.forecast.domain.usecase
 
-import com.nab.weather.forecast.domain.entity.DailyForecastEntity
-import com.nab.weather.forecast.domain.entity.Mapper
 import com.nab.weather.forecast.domain.repository.ForecastRepository
 import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
 import javax.inject.Inject
@@ -14,11 +12,5 @@ class GetCityForecastUseCaseImpl @Inject constructor(
         query: String,
         count: Int,
         appId: String
-    ): List<DailyForecastEntity>? {
-        val cityForecastDto = repository.getCityDailyForecast(query, count, appId)
-        val listForecastEntity = cityForecastDto.list?.map {
-            Mapper.map(it)
-        }
-        return listForecastEntity
-    }
+    ) = repository.getCityDailyForecast(query, count, appId)
 }

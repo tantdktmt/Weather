@@ -1,11 +1,15 @@
 package com.nab.weather.forecast.presentation.daily
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.nab.weather.common.base.BaseFragment
 import com.nab.weather.forecast.BR
 import com.nab.weather.forecast.R
 import com.nab.weather.forecast.databinding.FragmentDailyForecastBinding
+import com.nab.weather.utility.LogUtil
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class DailyForecastFragment :
@@ -24,6 +28,11 @@ class DailyForecastFragment :
 
     override fun observeDataChanged() {
         with(viewModel) {
+            listForecastModel.onEach {
+                LogUtil.d("list forecast: ${it.size}")
+                if (it.isNotEmpty()) {
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
     }
 

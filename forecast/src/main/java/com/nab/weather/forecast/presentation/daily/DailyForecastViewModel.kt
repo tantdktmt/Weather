@@ -2,6 +2,7 @@ package com.nab.weather.forecast.presentation.daily
 
 import androidx.lifecycle.viewModelScope
 import com.nab.weather.common.base.BaseViewModel
+import com.nab.weather.common.data.Result
 import com.nab.weather.forecast.presentation.model.DailyForecastModel
 import com.nab.weather.forecast.presentation.model.ModelUtil
 import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
@@ -22,12 +23,22 @@ class DailyForecastViewModel @Inject constructor(private val getCityForecastUseC
 
     fun loadData() {
         viewModelScope.launch {
-            showLoading()
             // TESTING: replace with dynamic params
-            getCityForecastUseCase("saigon", 7, "60c6fbeb4b93ac653c492ba806fc346d")?.let {
-                _listForecastModel.value = ModelUtil.buildListDailyForecastModel(it)
+            getCityForecastUseCase("saigon", 7, "60c6fbeb4b93ac653c492ba806fc346d").collect {
+                when (it) {
+                    is Result.Loading -> _loading.value = true
+                    is Result.Success -> {
+                        it.data?.list?.let {
+                            _listForecastModel.value = ModelUtil.buildListDailyForecastModel(it)
+                        }
+                        _loading.value = false
+                    }
+                    is Result.Error -> {
+                        _error.emit(Result.Error(it.code, it.message))
+                        _loading.value = false
+                    }
+                }
             }
-            hideLoading()
         }
     }
 }

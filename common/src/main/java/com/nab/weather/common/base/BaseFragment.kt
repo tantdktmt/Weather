@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
-abstract class BaseFragment<VM : ViewModel, T : ViewDataBinding> : Fragment(){
+abstract class BaseFragment<VM : BaseViewModel, T : ViewDataBinding> : Fragment() {
 
     private var _binding: T? = null
     val binding get() = _binding!!
@@ -25,6 +28,16 @@ abstract class BaseFragment<VM : ViewModel, T : ViewDataBinding> : Fragment(){
     protected abstract fun getAssociatedViewModel(): VM
 
     protected abstract fun observeDataChanged()
+
+    protected open fun observeError() {
+        getAssociatedViewModel().error.onEach {
+            Toast.makeText(
+                requireContext(),
+                "Error: code=${it.code}, message=${it.message}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
     protected open fun initView() {
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -71,6 +84,7 @@ abstract class BaseFragment<VM : ViewModel, T : ViewDataBinding> : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         initView()
         observeDataChanged()
+        observeError()
     }
 
     override fun onDestroyView() {
