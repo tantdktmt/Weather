@@ -4,10 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.nab.weather.common.base.BaseViewModel
-import com.nab.weather.common.data.Result
 import com.nab.weather.forecast.presentation.model.BaseListModel
-import com.nab.weather.forecast.presentation.model.ModelUtil
-import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DailyForecastViewModel @Inject constructor(
-    @ApplicationContext val applicationContext: Context,
-    private val getCityForecastUseCase: GetCityForecastUseCase
+    @ApplicationContext val applicationContext: Context
 ) : BaseViewModel(applicationContext as Application) {
 
     private val _listForecastModel: MutableStateFlow<List<BaseListModel>> by lazy {
@@ -29,21 +25,6 @@ class DailyForecastViewModel @Inject constructor(
     fun loadData() {
         viewModelScope.launch {
             // TESTING: replace with dynamic params
-            getCityForecastUseCase("saigon", 7, "60c6fbeb4b93ac653c492ba806fc346d").collect {
-                when (it) {
-                    is Result.Loading -> _loading.value = true
-                    is Result.Success -> {
-                        it.data?.list?.let {
-                            _listForecastModel.value = ModelUtil.buildListDailyForecastModel(applicationContext, it)
-                        }
-                        _loading.value = false
-                    }
-                    is Result.Error -> {
-                        _error.emit(Result.Error(it.code, it.message))
-                        _loading.value = false
-                    }
-                }
-            }
         }
     }
 }

@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
 
     implementation 'com.google.dagger:hilt-android:2.41'
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
