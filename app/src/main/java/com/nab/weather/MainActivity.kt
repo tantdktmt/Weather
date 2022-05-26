@@ -6,16 +6,22 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.nab.weather.common.base.BaseActivity
+import com.nab.weather.config.Config
 import com.nab.weather.databinding.ActivityMainBinding
+import com.nab.weather.utility.CryptoUtil
 import com.nab.weather.utility.DeviceUtil
 import com.nab.weather.utility.MainEvent
 import com.nab.weather.utility.MainEventDispatcher
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() {
+
+    @Inject
+    lateinit var cryptoUtil: CryptoUtil
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
@@ -49,5 +55,11 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             ).show()
             finish()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Hardcode OpenWeatherApi appId
+        cryptoUtil.saveWeatherApiAppId(Config.WEATHER_API_APP_ID)
     }
 }

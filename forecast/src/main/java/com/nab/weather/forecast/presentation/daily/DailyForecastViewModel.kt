@@ -7,6 +7,7 @@ import com.nab.weather.config.Config
 import com.nab.weather.forecast.presentation.model.BaseListModel
 import com.nab.weather.forecast.presentation.model.ModelUtil
 import com.nab.weather.forecast.presentation.usecase.GetDailyForecastUseCase
+import com.nab.weather.utility.CryptoUtil
 import com.nab.weather.utility.sharedpref.SharedPreferenceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DailyForecastViewModel @Inject constructor(
-    private val getDailyForecastUseCase: GetDailyForecastUseCase
+    private val getDailyForecastUseCase: GetDailyForecastUseCase,
+    private val cryptoUtil: CryptoUtil
 ) : BaseViewModel() {
 
     private val _listForecastModel: MutableStateFlow<List<BaseListModel>> by lazy {
@@ -29,7 +31,7 @@ class DailyForecastViewModel @Inject constructor(
             getDailyForecastUseCase(
                 keyword,
                 Config.DAILY_FORECAST_SEARCH_COUNT,
-                SharedPreferenceUtil.getWeatherApiAppId()
+                cryptoUtil.getWeatherApiAppId()
             ).collect {
                 when (it) {
                     is Result.Loading -> _loading.value = true
