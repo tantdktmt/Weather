@@ -1,6 +1,6 @@
 package com.nab.weather.forecast.data.dto
 
-data class CityForecastDto(
+data class ForecastDto(
     val city: CityDto?,
     val cod: String?,
     val message: Double?,

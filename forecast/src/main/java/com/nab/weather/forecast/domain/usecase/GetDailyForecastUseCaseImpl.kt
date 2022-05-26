@@ -1,16 +1,16 @@
 package com.nab.weather.forecast.domain.usecase
 
 import com.nab.weather.forecast.domain.repository.ForecastRepository
-import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
+import com.nab.weather.forecast.presentation.usecase.GetDailyForecastUseCase
 import javax.inject.Inject
 
-class GetCityForecastUseCaseImpl @Inject constructor(
+class GetDailyForecastUseCaseImpl @Inject constructor(
     private val repository: ForecastRepository
-) : GetCityForecastUseCase {
+) : GetDailyForecastUseCase {
 
     override suspend fun invoke(
         query: String,
         count: Int,
-        appId: String
-    ) = repository.getCityDailyForecast(query, count, appId)
+        appId: String?
+    ) = repository.getDailyForecast(query, count, appId)
 }

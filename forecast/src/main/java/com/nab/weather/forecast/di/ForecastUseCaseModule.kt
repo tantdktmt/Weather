@@ -1,7 +1,7 @@
 package com.nab.weather.forecast.di
 
-import com.nab.weather.forecast.domain.usecase.GetCityForecastUseCaseImpl
-import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
+import com.nab.weather.forecast.domain.usecase.GetDailyForecastUseCaseImpl
+import com.nab.weather.forecast.presentation.usecase.GetDailyForecastUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ abstract class ForecastUseCaseModule {
 
     @Binds
     abstract fun provideGetListJobUseCase(
-        getCityForecastUseCaseImpl: GetCityForecastUseCaseImpl
-    ): GetCityForecastUseCase
+        getCityForecastUseCaseImpl: GetDailyForecastUseCaseImpl
+    ): GetDailyForecastUseCase
 }

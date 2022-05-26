@@ -2,7 +2,7 @@ package com.nab.weather.network.di
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import com.nab.weather.config.Constant
+import com.nab.weather.config.Config
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -104,7 +104,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constant.API_BASE_URL)
+            .baseUrl(Config.API_BASE_URL)
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .build()

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -39,6 +40,7 @@ abstract class BaseFragment<VM : BaseViewModel, T : ViewDataBinding> : Fragment(
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
+    @CallSuper
     protected open fun initView() {
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,

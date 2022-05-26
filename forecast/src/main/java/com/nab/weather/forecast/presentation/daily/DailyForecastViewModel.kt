@@ -3,9 +3,11 @@ package com.nab.weather.forecast.presentation.daily
 import androidx.lifecycle.viewModelScope
 import com.nab.weather.common.base.BaseViewModel
 import com.nab.weather.common.data.Result
+import com.nab.weather.config.Config
 import com.nab.weather.forecast.presentation.model.BaseListModel
 import com.nab.weather.forecast.presentation.model.ModelUtil
-import com.nab.weather.forecast.presentation.usecase.GetCityForecastUseCase
+import com.nab.weather.forecast.presentation.usecase.GetDailyForecastUseCase
+import com.nab.weather.utility.sharedpref.SharedPreferenceUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DailyForecastViewModel @Inject constructor(
-    private val getCityForecastUseCase: GetCityForecastUseCase
+    private val getDailyForecastUseCase: GetDailyForecastUseCase
 ) : BaseViewModel() {
 
     private val _listForecastModel: MutableStateFlow<List<BaseListModel>> by lazy {
@@ -22,10 +24,13 @@ class DailyForecastViewModel @Inject constructor(
     }
     val listForecastModel = _listForecastModel.asStateFlow()
 
-    fun loadData() {
+    fun getDailyForecast(keyword: String) {
         viewModelScope.launch {
-            // TESTING: replace with dynamic params
-            getCityForecastUseCase("saigon", 7, "60c6fbeb4b93ac653c492ba806fc346d").collect {
+            getDailyForecastUseCase(
+                keyword,
+                Config.DAILY_FORECAST_SEARCH_COUNT,
+                SharedPreferenceUtil.getWeatherApiAppId()
+            ).collect {
                 when (it) {
                     is Result.Loading -> _loading.value = true
                     is Result.Success -> {
@@ -36,6 +41,7 @@ class DailyForecastViewModel @Inject constructor(
                     }
                     is Result.Error -> {
                         _error.emit(Result.Error(it.code, it.message))
+                        _listForecastModel.value = listOf()
                         _loading.value = false
                     }
                 }
