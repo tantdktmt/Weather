@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="device_rooted_notice">The application could not run on root device</string>
 </resources>

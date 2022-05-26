@@ -1,10 +1,13 @@
 package com.nab.weather
 
+import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.nab.weather.common.base.BaseActivity
 import com.nab.weather.databinding.ActivityMainBinding
+import com.nab.weather.utility.DeviceUtil
 import com.nab.weather.utility.MainEvent
 import com.nab.weather.utility.MainEventDispatcher
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,5 +37,17 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
                 }
             }
         }.launchIn(lifecycleScope)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (DeviceUtil.isDeviceRooted()) {
+            Toast.makeText(
+                this,
+                baseContext.getString(R.string.device_rooted_notice),
+                Toast.LENGTH_LONG
+            ).show()
+            finish()
+        }
     }
 }
