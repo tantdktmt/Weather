@@ -8,5 +8,5 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(@ApplicationContext val applicationContext: Context) :
-    BaseViewModel(applicationContext as Application)
+class MainActivityViewModel @Inject constructor() :
+    BaseViewModel()

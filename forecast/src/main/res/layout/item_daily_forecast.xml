@@ -20,30 +20,30 @@
             style="@style/ItemContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item_data.date}" />
+            android:text="@{@string/weather_forecast_item_date_text(item_data.date)}" />
 
         <TextView
             style="@style/ItemContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item_data.averageTemp}" />
+            android:text="@{@string/weather_forecast_item_temperature_text(item_data.averageTemp)}" />
 
         <TextView
             style="@style/ItemContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item_data.pressure}" />
+            android:text="@{@string/weather_forecast_item_pressure_text(item_data.pressure)}" />
 
         <TextView
             style="@style/ItemContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item_data.humidity}" />
+            android:text="@{@string/weather_forecast_item_humidity_text(item_data.humidity)}" />
 
         <TextView
             style="@style/ItemContentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item_data.description}" />
+            android:text="@{@string/weather_forecast_item_description_text(item_data.description)}" />
     </LinearLayout>
 </layout>

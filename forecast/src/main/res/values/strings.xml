@@ -5,8 +5,8 @@
     <string name="weather_forecast_search_hint">Input keyword to search weather</string>
     <string name="weather_forecast_get_weather_button_text">Get Weather</string>
     <string name="weather_forecast_item_date_text">Date: %s</string>
-    <string name="weather_forecast_item_temperature_text">Average temperature: %s\U+00B0C</string>
+    <string name="weather_forecast_item_temperature_text">Average temperature: %d\u2103</string>
     <string name="weather_forecast_item_pressure_text">Pressure: %d</string>
-    <string name="weather_forecast_item_humidity_text">Humidity: %d</string>
+    <string name="weather_forecast_item_humidity_text">Humidity: %d%%</string>
     <string name="weather_forecast_item_description_text">Description: %s</string>
 </resources>
