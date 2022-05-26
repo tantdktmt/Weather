@@ -3,11 +3,13 @@ package com.nab.weather.network.di
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import com.nab.weather.config.Config
+import com.nab.weather.network.interceptor.CacheInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.CipherSuite
 import okhttp3.ConnectionSpec
 import okhttp3.Dispatcher
@@ -38,6 +40,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCacheInterceptor(@ApplicationContext appContext: Context) =
+        CacheInterceptor(appContext)
+
+    @Provides
+    @Singleton
     fun provideDispatcher(): Dispatcher {
         val dispatcher = Dispatcher().apply {
             maxRequests = 1
@@ -59,10 +66,19 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
+    fun provideCache(@ApplicationContext appContext: Context): Cache {
+        val cacheSize = (5 * 1024 * 1024).toLong()
+        return Cache(appContext.cacheDir, cacheSize)
+    }
+
+    @Provides
     @Suppress("LongParameterList")
     fun provideOkHttpClientBuilder(
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        cacheInterceptor: CacheInterceptor,
         dispatcher: Dispatcher,
+        cache: Cache,
         connectionSpec: ConnectionSpec
     ): OkHttpClient.Builder {
         return OkHttpClient().newBuilder()
@@ -71,6 +87,8 @@ object NetworkModule {
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectionSpecs(arrayListOf(connectionSpec, ConnectionSpec.CLEARTEXT))
+            .cache(cache)
+            .addInterceptor(cacheInterceptor)
             .addInterceptor(httpLoggingInterceptor)
     }
 

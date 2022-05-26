@@ -11,4 +11,8 @@ object Config {
     const val APP_SHARED_PREFERENCE_NAME = "nab_weather_shared_pref"
 
     const val WEATHER_API_APP_ID = "60c6fbeb4b93ac653c492ba806fc346d"
+
+    const val KEY_HEADER_CACHE_CONTROL = "Cache-Control"
+    const val CACHE_CONTROL_MAX_AGE = 5
+    const val CACHE_CONTROL_MAX_STALE = 60 * 60 * 24 * 7
 }
