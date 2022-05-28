@@ -8,8 +8,12 @@ object DateUtil {
 
     const val DATE_FORMAT = "EEE, dd MMM yyyy"
 
-    fun convertDateToString(date: Date, format: String = DATE_FORMAT) =
+    fun convertDateToString(date: Date, format: String = DATE_FORMAT) = try {
         SimpleDateFormat(format, Locale.getDefault()).format(date)
+    } catch (e: Exception) {
+        null
+    }
+
 
     fun convertLongToString(time: Long?, format: String = DATE_FORMAT): String? {
         time?.let {

@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class ForecastUseCaseModule {
 
     @Binds
-    abstract fun provideGetListJobUseCase(
-        getCityForecastUseCaseImpl: GetDailyForecastUseCaseImpl
+    abstract fun provideGetForecastUseCase(
+        getDailyForecastUseCaseImpl: GetDailyForecastUseCaseImpl
     ): GetDailyForecastUseCase
 }

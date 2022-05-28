@@ -1,7 +1,9 @@
 package com.nab.weather.forecast.data.dto
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class ForecastDto(
     val city: City?,
     val cod: String?,
@@ -10,6 +12,7 @@ data class ForecastDto(
     val list: List<Daily>?
 ) {
 
+    @Keep
     data class City(
         val id: Int?,
         val name: String?,
@@ -19,11 +22,13 @@ data class ForecastDto(
         val timezone: Long?
     )
 
+    @Keep
     data class Coord(
         val lon: Double?,
         val lat: Double?
     )
 
+    @Keep
     data class Daily(
         val dt: Long?,
         val sunrise: Long?,
@@ -41,6 +46,7 @@ data class ForecastDto(
         val rain: Float?
     )
 
+    @Keep
     data class Temp(
         val day: Float?,
         val min: Float?,
@@ -50,6 +56,7 @@ data class ForecastDto(
         val morn: Float?
     )
 
+    @Keep
     data class FeelsLike(
         val day: Float?,
         val night: Float?,
@@ -57,6 +64,7 @@ data class ForecastDto(
         val morn: Float?
     )
 
+    @Keep
     data class Weather(
         val id: Int?,
         val main: String?,
