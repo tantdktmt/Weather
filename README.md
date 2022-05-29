@@ -27,6 +27,8 @@ Include 6 library modules and 1 app module:
  - forecast: feature module corresponding to forecast feature
  <br/>
  - app: contains MainActivity, application class
+<h2>Used libraries</h2>
+Retrofit/OkHttp, Hilt, Kotlin coroutines, sdp/ssp, 
 <h2>Steps to launch app</h2>
 
 <h2>Done items</h2>All candidate items
