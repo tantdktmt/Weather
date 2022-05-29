@@ -11,7 +11,7 @@ Fetch weather daily forecast based on search term from input and display in the 
  - Use Hilt for Dependency Injection
 <br/>
  - Use best practices suggested by google: Kotlin Flow, ListAdapter, ...
-<h2>Source code folder structure</h2>
+<h2>Source code structure</h2>
 Include 6 library modules and 1 app module:
 <br/>
  - config: contains configs, constants, ...
@@ -28,7 +28,7 @@ Include 6 library modules and 1 app module:
  - forecast: feature module corresponding to forecast feature
  <br/>
  - app: contains MainActivity, application class
-<h2>Used libraries</h2>
+<h2>3rd libraries</h2>
 Retrofit/OkHttp, Hilt, Kotlin coroutines, sdp/ssp, 
 <h2>Steps to launch app</h2>
 <br/>
