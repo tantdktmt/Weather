@@ -16,15 +16,14 @@ Include 6 library modules and 1 app module:
 <br/>
  - config: contains configs, constants, ...
 <br/>
- - utility: contains utilities
+ - utility: contains utilities (CryptoUtil, DateUtil, ...)
 <br/>
  - extension: contains extension (ViewExt, NavControllerExt, ...)
 <br/>
  - network: contains some common network classes (interceptors, authenticators, ...), network dependencies (Dispatcher, Cache, OkHttpClient, Retrofit, ...)
-<br/>
- - utility: contains utilities (CryptoUtil, DateUtil, ...)
  <br/>
  - common: base classes (BaseActivity, BaseFragment, BaseViewModel), widget, dialog, ...
+ <br/>
  - forecast: feature module corresponding to forecast feature
  <br/>
  - app: contains MainActivity, application class
