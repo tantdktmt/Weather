@@ -10,6 +10,8 @@ import com.google.gson.reflect.TypeToken
 
 object CommonUtil {
 
+    fun compareTwoObjects(object1: Any, object2: Any) = false
+
     fun loadJsonFromAsset(context: Context, fileName: String): String {
         return context.assets.open(fileName).bufferedReader().use { it.readText() }
     }
